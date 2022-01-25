@@ -1,12 +1,11 @@
 import br.com.letscode.rebeldes.Raça;
 import br.com.letscode.rebeldes.Rebelde;
+import br.com.letscode.rebeldes.RebeldeCadastroView;
 
 public class RebeldesApp {
     public static void main(String[] args) {
-        Rebelde rebelde = Rebelde.builder()
-                .Nome("Joao")
-                .Idade(33)
-                .Raça(Raça.HUMANO).build();
-        System.out.println(rebelde.toString());
+        RebeldeCadastroView rebeldeCadastroView = new RebeldeCadastroView();
+        rebeldeCadastroView.showMenu();
+
     }
 }
