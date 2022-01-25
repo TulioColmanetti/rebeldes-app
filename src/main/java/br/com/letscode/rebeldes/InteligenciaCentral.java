@@ -1,7 +1,11 @@
 package br.com.letscode.rebeldes;
 
+import lombok.Cleanup;
 import lombok.Getter;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -25,7 +29,10 @@ public class InteligenciaCentral {
             return false;
     }
 
-    public void gerarRelatorioDeRebeldes() {
-
+    public void gerarRelatorioDeRebeldes() throws FileNotFoundException, UnsupportedEncodingException {
+        @Cleanup PrintWriter writer = new PrintWriter("arquivo.txt", "UTF-8");
+        writer.println("LISTA DE REBELDES:");
+        for (Rebelde rebelde : this.rebeldes)
+            writer.println(rebelde.toString());
     }
 }
