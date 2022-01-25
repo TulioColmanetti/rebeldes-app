@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class RebeldeMainView {
     private Scanner scanner;
-    private InteligenciaCentral inteligenciaCentral = InteligenciaCentral.builder().build();
+    private InteligenciaCentral inteligenciaCentral = new InteligenciaCentral();
     private Rebelde rebelde;
     private String nome;
     private int idade;
@@ -68,10 +68,22 @@ public class RebeldeMainView {
             System.out.println("Rebelde '" + rebelde.getNome() + "' recusado!");
     }
 
+    private void exibirRebeldes() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Lista de rebeldes:");
+        for (Rebelde rebelde : inteligenciaCentral.getRebeldes())
+        {
+            sb.append(rebelde.toString());
+            sb.append("\n");
+        }
+        System.out.println(sb);
+    }
+
     public void renderMenu() {
         System.out.println("<<<<< Menu da Aliança Rebelde >>>>>");
         System.out.println("Escolha uma opção abaixo:");
         System.out.println("'S' - Solicitar Ingresso na Aliança");
+        System.out.println("'E' - Exibir Lista de Rebeldes");
         System.out.println("'R' - Gerar Relatório de Rebeldes");
         System.out.println("'X' - Sair");
     }
@@ -87,6 +99,10 @@ public class RebeldeMainView {
                 case "S":
                     obtemDadosRebelde();
                     solicitaIngressoIC();
+                    renderMenu();
+                    break;
+                case "E":
+                    exibirRebeldes();
                     renderMenu();
                     break;
                 case "R":
