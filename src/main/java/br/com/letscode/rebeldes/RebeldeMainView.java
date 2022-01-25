@@ -2,15 +2,15 @@ package br.com.letscode.rebeldes;
 
 import java.util.Scanner;
 
-public class RebeldeCadastroView {
+public class RebeldeMainView {
     private Scanner scanner;
-    private InteligenciaCentral inteligenciaCentral = new InteligenciaCentral();
+    private InteligenciaCentral inteligenciaCentral = InteligenciaCentral.builder().build();
     private Rebelde rebelde;
     private String nome;
     private int idade;
     private Raça raça;
 
-    public RebeldeCadastroView(){
+    public RebeldeMainView(){
         this.scanner = new Scanner(System.in);
     }
 
@@ -23,6 +23,23 @@ public class RebeldeCadastroView {
         } else
             this.nome = nome;
     }
+
+    private void obtemDadosRebelde() {
+        askNome();
+        askIdade();
+        askRaça();
+    }
+
+    private void solicitaIngressoIC() {
+        this.rebelde = Rebelde.builder()
+                .Nome(this.nome)
+                .Idade(this.idade)
+                .Raça(this.raça)
+                .build();
+
+        boolean ingressou = this.inteligenciaCentral.solicitarIngressoDeRebelde(this.rebelde);
+    }
+
 
     private void askIdade() {
         System.out.println("Qual a idade do Rebelde?");
@@ -47,12 +64,6 @@ public class RebeldeCadastroView {
             this.raça = Raça.values()[raçaIndex];
     }
 
-    private void obtemDadosRebeldeESolicitaIngressoIC() {
-        askNome();
-        askIdade();
-        askRaça();
-    }
-
     public void showMenu() {
         System.out.println("Digite 'S' para Solicitar Ingresso na Aliança ou 'X' para Sair");
 
@@ -62,7 +73,8 @@ public class RebeldeCadastroView {
             option = scanner.next();
             switch (option.toUpperCase()) {
                 case "S":
-                    obtemDadosRebeldeESolicitaIngressoIC();
+                    obtemDadosRebelde()
+                    solicitaIngressoIC();
                     this.showMenu();
                     break;
                 case "X":

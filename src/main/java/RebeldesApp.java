@@ -1,10 +1,8 @@
-import br.com.letscode.rebeldes.Raça;
-import br.com.letscode.rebeldes.Rebelde;
-import br.com.letscode.rebeldes.RebeldeCadastroView;
+import br.com.letscode.rebeldes.RebeldeMainView;
 
 public class RebeldesApp {
     public static void main(String[] args) {
-        RebeldeCadastroView rebeldeCadastroView = new RebeldeCadastroView();
+        RebeldeMainView rebeldeCadastroView = new RebeldeMainView();
         rebeldeCadastroView.showMenu();
 
     }
