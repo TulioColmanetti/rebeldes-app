@@ -1,5 +1,7 @@
 package br.com.letscode.rebeldes;
 
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
 
 public class RebeldeMainView {
@@ -68,15 +70,25 @@ public class RebeldeMainView {
             System.out.println("Rebelde '" + rebelde.getNome() + "' recusado!");
     }
 
-    private void exibirRebeldes() {
+    private void exibirRebeldesIC() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Lista de rebeldes:");
-        for (Rebelde rebelde : inteligenciaCentral.getRebeldes())
+        sb.append("Lista de rebeldes:\n");
+        for (Rebelde rebelde : this.inteligenciaCentral.getRebeldes())
         {
             sb.append(rebelde.toString());
             sb.append("\n");
         }
         System.out.println(sb);
+    }
+
+    private void gerarRelatorioRebeldesIC() {
+        try {
+            this.inteligenciaCentral.gerarRelatorioDeRebeldes();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 
     public void renderMenu() {
@@ -102,10 +114,12 @@ public class RebeldeMainView {
                     renderMenu();
                     break;
                 case "E":
-                    exibirRebeldes();
+                    exibirRebeldesIC();
                     renderMenu();
                     break;
                 case "R":
+                    gerarRelatorioRebeldesIC();
+                    renderMenu();
                     break;
                 case "X":
                     status = false;
