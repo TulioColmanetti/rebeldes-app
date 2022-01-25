@@ -73,7 +73,7 @@ public class RebeldeMainView {
             option = scanner.next();
             switch (option.toUpperCase()) {
                 case "S":
-                    obtemDadosRebelde()
+                    obtemDadosRebelde();
                     solicitaIngressoIC();
                     this.showMenu();
                     break;
