@@ -24,23 +24,6 @@ public class RebeldeMainView {
             this.nome = nome;
     }
 
-    private void obtemDadosRebelde() {
-        askNome();
-        askIdade();
-        askRaça();
-    }
-
-    private void solicitaIngressoIC() {
-        this.rebelde = Rebelde.builder()
-                .Nome(this.nome)
-                .Idade(this.idade)
-                .Raça(this.raça)
-                .build();
-
-        boolean ingressou = this.inteligenciaCentral.solicitarIngressoDeRebelde(this.rebelde);
-    }
-
-
     private void askIdade() {
         System.out.println("Qual a idade do Rebelde?");
         int idade = scanner.nextInt();
@@ -64,8 +47,37 @@ public class RebeldeMainView {
             this.raça = Raça.values()[raçaIndex];
     }
 
+    private void obtemDadosRebelde() {
+        askNome();
+        askIdade();
+        askRaça();
+
+        this.rebelde = Rebelde.builder()
+                .Nome(this.nome)
+                .Idade(this.idade)
+                .Raça(this.raça)
+                .build();
+    }
+
+    private void solicitaIngressoIC() {
+        boolean ingressou = this.inteligenciaCentral.solicitarIngressoDeRebelde(this.rebelde);
+
+        if(ingressou)
+            System.out.println("Rebelde '" + rebelde.getNome() + "' ingressou na Aliança!");
+        else
+            System.out.println("Rebelde '" + rebelde.getNome() + "' recusado!");
+    }
+
+    public void renderMenu() {
+        System.out.println("<<<<< Menu da Aliança Rebelde >>>>>");
+        System.out.println("Escolha uma opção abaixo:");
+        System.out.println("'S' - Solicitar Ingresso na Aliança");
+        System.out.println("'R' - Gerar Relatório de Rebeldes");
+        System.out.println("'X' - Sair");
+    }
+
     public void showMenu() {
-        System.out.println("Digite 'S' para Solicitar Ingresso na Aliança ou 'X' para Sair");
+        renderMenu();
 
         String option;
         boolean status = true;
@@ -75,7 +87,9 @@ public class RebeldeMainView {
                 case "S":
                     obtemDadosRebelde();
                     solicitaIngressoIC();
-                    this.showMenu();
+                    renderMenu();
+                    break;
+                case "R":
                     break;
                 case "X":
                     status = false;
